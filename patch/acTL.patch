@@ -1,0 +1,89 @@
+diff --git a/png.h b/png.h
+index 4064479d7..41b483ab9 100644
+--- a/png.h
++++ b/png.h
+@@ -3257,6 +3257,8 @@ PNG_EXPORT(268, png_uint_32, png_get_acTL, (png_structp png_ptr,
+ PNG_EXPORT(269, png_uint_32, png_set_acTL, (png_structp png_ptr,
+    png_infop info_ptr, png_uint_32 num_frames, png_uint_32 num_plays));
+ 
++PNG_EXPORT(270, png_uint_32, png_get_acTL_chunk_pos, (png_structp png_ptr));
++
+ PNG_EXPORT(250, png_uint_32, png_get_num_frames, (png_structp png_ptr,
+    png_infop info_ptr));
+ 
+@@ -3328,7 +3330,7 @@ PNG_EXPORT(267, void, png_write_frame_tail, (png_structp png_ptr,
+  */
+ #ifdef PNG_EXPORT_LAST_ORDINAL
+ #ifdef PNG_APNG_SUPPORTED
+-  PNG_EXPORT_LAST_ORDINAL(269);
++  PNG_EXPORT_LAST_ORDINAL(270);
+ #else
+   PNG_EXPORT_LAST_ORDINAL(249);
+ #endif /* APNG */
+diff --git a/pngget.c b/pngget.c
+index 2638cfbe9..7243aa46a 100644
+--- a/pngget.c
++++ b/pngget.c
+@@ -1265,6 +1265,12 @@ png_get_acTL(png_structp png_ptr, png_infop info_ptr,
+     return (0);
+ }
+ 
++png_uint_32 PNGAPI
++png_get_acTL_chunk_pos(png_structp png_ptr)
++{
++    return (png_ptr->acTLPos);
++}
++
+ png_uint_32 PNGAPI
+ png_get_num_frames(png_structp png_ptr, png_infop info_ptr)
+ {
+diff --git a/pngstruct.h b/pngstruct.h
+index d45a55754..f0a006916 100644
+--- a/pngstruct.h
++++ b/pngstruct.h
+@@ -506,5 +506,7 @@ struct png_struct_def
+    png_colorspace   colorspace;
+ #endif
+ #endif
++
++   png_uint_32 acTLPos;
+ };
+ #endif /* PNGSTRUCT_H */
+diff --git a/pngwrite.c b/pngwrite.c
+index 6bae1e05a..cd220ad01 100644
+--- a/pngwrite.c
++++ b/pngwrite.c
+@@ -370,8 +370,6 @@ png_write_end(png_structrp png_ptr, png_inforp info_ptr)
+       png_error(png_ptr, "No IDATs written into file");
+ 
+ #ifdef PNG_WRITE_APNG_SUPPORTED
+-   if (png_ptr->num_frames_written != png_ptr->num_frames_to_write)
+-      png_error(png_ptr, "Not enough frames written");
+ #endif
+ 
+ #ifdef PNG_WRITE_CHECK_FOR_INVALID_INDEX_SUPPORTED
+diff --git a/pngwutil.c b/pngwutil.c
+index d9b0a8988..0706e8ed1 100644
+--- a/pngwutil.c
++++ b/pngwutil.c
+@@ -1933,6 +1933,7 @@ png_write_acTL(png_structp png_ptr,
+     png_save_uint_32(buf, num_frames);
+     png_save_uint_32(buf + 4, num_plays);
+ 
++    png_ptr->acTLPos = ftell(png_ptr->io_ptr);
+     png_write_complete_chunk(png_ptr, png_acTL, buf, (png_size_t)8);
+ }
+ 
+diff --git a/scripts/symbols.def b/scripts/symbols.def
+index 59fb30af1..9011ee8a3 100644
+--- a/scripts/symbols.def
++++ b/scripts/symbols.def
+@@ -272,4 +272,5 @@ EXPORTS
+  png_write_frame_head @266
+  png_write_frame_tail @267
+  png_get_acTL @268
+- png_set_acTL @269
+\ No newline at end of file
++ png_set_acTL @269
++ png_get_acTL_chunk_pos @270
+\ No newline at end of file

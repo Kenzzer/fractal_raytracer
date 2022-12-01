@@ -1,0 +1,23 @@
+image: kenzzer/clang-cmake
+
+variables:
+  GIT_SUBMODULE_STRATEGY: recursive
+
+workflow:
+  rules:
+    - if: '$CI_MERGE_REQUEST_TARGET_BRANCH_NAME == "main" || $CI_PIPELINE_SOURCE == "merge_request_event"'
+
+stages:
+  - build
+
+validate:
+  stage: build
+  script:
+    - export CC=clang
+    - export CXX=clang++
+    - mkdir -p build
+    - cd build
+    - cmake --target test -j 9 ..
+    - make
+    - cd ..
+    - ./build/test

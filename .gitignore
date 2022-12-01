@@ -1,0 +1,9 @@
+/.idea/*
+/.idea/
+/cmake-*/
+/default.profraw
+/build/
+/build/*
+/tests/Menger/mengerForTest*
+/tags
+/resources/tests/mengerForTest*

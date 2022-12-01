@@ -1,0 +1,74 @@
+{
+  "cameras": [
+    {
+      "position": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "focus": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "up": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "fov": 45.0,
+      "focal": 1.0
+    },
+    {
+      "position": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "focus": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "up": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "fov": 45.0,
+      "focal": 1.0
+    }
+  ],
+  "objects": [
+    {
+      "type": "cube",
+      "length": 6969,
+      "position":
+      {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      }
+    }
+  ],
+  "lights": [
+    {
+      "type": "point_light",
+      "position": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "intensity": 1.0
+    },
+    {
+      "type": "point_light",
+      "position": {
+        "x": 1,
+        "y": 1,
+        "z": 1
+      },
+      "intensity": 1.0
+    }
+  ]
+}

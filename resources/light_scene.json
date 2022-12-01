@@ -1,0 +1,92 @@
+{
+    "ambient": 0.2,
+    "depth": 8,
+    "cameras": [
+      {
+        "position": {
+          "x": 0,
+          "y": -50,
+          "z": 20
+        },
+        "focus": {
+          "x": 0,
+          "y": 10,
+          "z": 10
+        },
+        "up": {
+          "x": 0,
+          "y": 0,
+          "z": 1
+        },
+        "fov": 45.0,
+        "focal": 1.0
+      }
+    ],
+    "objects": [
+      {
+        "type": "cube_box",
+        "length": 10000,
+        "position":
+        {
+            "x": 0, 
+            "y": 0,
+            "z": -5000
+        }
+      },
+      {
+        "type": "sphere",
+        "radius": 5.0,
+        "position":
+        {
+          "x": 0, 
+          "y": 20,
+          "z": 5
+        },
+        "material":
+        {
+          "r": 10,
+          "g": 230,
+          "b": 10,
+          "kd": 1.0,
+          "ks": 0.0,
+          "kr": 0.0,
+          "ka": 1.0,
+          "km": 1.0,
+          "ns": 100.0
+        }
+      },
+      {
+        "type": "sphere",
+        "radius": 5.0,
+        "position":
+        {
+          "x": 10, 
+          "y": 20,
+          "z": 5
+        },
+        "material":
+        {
+          "r": 10,
+          "g": 170,
+          "b": 200,
+          "kd": 1.0,
+          "ks": 1.0,
+          "kr": 0.0,
+          "ka": 1.0,
+          "km": 1.0,
+          "ns": 10.0
+        }
+      }
+    ],
+    "lights": [
+      {
+        "type": "point_light",
+        "position": {
+          "x": -500,
+          "y": 0,
+          "z": 1000
+        },
+        "intensity": 1.0
+      }
+    ]
+  }
